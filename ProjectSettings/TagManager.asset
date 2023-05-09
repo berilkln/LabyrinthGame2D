@@ -7,6 +7,7 @@ TagManager:
   - Terrain
   - PlayerFox
   - House
+  - Gem
   layers:
   - Default
   - TransparentFX
