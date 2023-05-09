@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Terrain
   - PlayerFox
+  - House
   layers:
   - Default
   - TransparentFX
