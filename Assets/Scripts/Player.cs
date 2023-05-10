@@ -10,12 +10,13 @@ public class Player : MonoBehaviour
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator anim;
     [SerializeField] GameObject restartPanel;
+    [SerializeField] GameObject[] spiritImage;
     [SerializeField] Text scoreText, spiritText;
     private float speed = 5f;
     private Vector2 moveVelocity;
     int score = 0;
     int playerLife = 3;
-
+    public static bool isDead = true;
 
     private void Start()
     {
@@ -43,11 +44,15 @@ public class Player : MonoBehaviour
         {
             Destroy(collision.gameObject);
             score += 2;
-            scoreText.text = "Score: " + score.ToString(); 
+            scoreText.text = "Score: " + score.ToString();
+            
+            
+            
 
         }
-        if (collision.tag == "Spirit")
+        if (collision.tag == "Spirit" && playerLife<=3)
         {
+            
             Destroy(collision.gameObject);
             playerLife++;
             spiritText.text = "Spirit: " + playerLife;
@@ -59,24 +64,23 @@ public class Player : MonoBehaviour
     {
         if (g.CompareTag("Enemy"))
         {
+            isDead = true;
             Destroy(this.gameObject);
             restartPanel.SetActive(true);
 
             playerLife--;
+            
             Debug.Log("can" + playerLife);
             if (playerLife <= 0)
             {
-                SceneManager.LoadScene("StartScene");
+                SceneManager.LoadScene("SampleScene");
             }
-
-
-
-
-
 
 
         }
     }
+
+   
 
 
 
