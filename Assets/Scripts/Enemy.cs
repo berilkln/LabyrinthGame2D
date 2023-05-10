@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject[] points;
     private int pointIndex = 0;
 
-    float enemySpeed = 4f;
+    float enemySpeed = 2f;
 
     private void Update()
     {
