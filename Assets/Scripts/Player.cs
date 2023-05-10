@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
     Animator anim;
     private float speed = 5f;
     private Vector2 moveVelocity;
+    int score = 0;
 
 
 
@@ -21,6 +23,14 @@ public class Player : MonoBehaviour
         rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
         PlayerRun(h, v);
         PlayerDirection(h);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Gem")
+        {
+            Destroy(collision.gameObject);
+            score += 2;
+        }
     }
 
 

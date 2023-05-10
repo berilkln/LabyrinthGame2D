@@ -8,6 +8,8 @@ TagManager:
   - PlayerFox
   - House
   - Gem
+  - Enemy
+  - Spirit
   layers:
   - Default
   - TransparentFX
