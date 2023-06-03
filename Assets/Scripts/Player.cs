@@ -9,21 +9,34 @@ public class Player : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Animator anim;
-    [SerializeField] GameObject restartPanel;
-    [SerializeField] GameObject[] spiritImage;
+    [SerializeField] GameObject restartPanel, endPanel, gameoverPanel;
+    //[SerializeField] GameObject[] spiritImage;
     [SerializeField] Text scoreText, spiritText;
     private float speed = 5f;
     private Vector2 moveVelocity;
     int score = 0;
-    int playerLife = 3;
-    public static bool isDead = true;
+    public int playerLife = 3;
+    public static bool isDead = false;
+    public static bool isStart = true;
 
     private void Start()
     {
+        //PlayerPrefs.DeleteKey("PlayerLife");
+        playerLife = PlayerPrefs.GetInt("PlayerLife");
         spiritText.text = "Spirit: " + playerLife;
+        if (GameManager.isRestart) //!!
+        {
+            isDead = false;
+
+        }
+        
     }
     private void FixedUpdate()
     {
+        if (!isStart)
+        {
+            return;
+        }
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(h, v);
@@ -46,9 +59,6 @@ public class Player : MonoBehaviour
             score += 2;
             scoreText.text = "Score: " + score.ToString();
             
-            
-            
-
         }
         if (collision.tag == "Spirit" && playerLife<=3)
         {
@@ -58,30 +68,47 @@ public class Player : MonoBehaviour
             spiritText.text = "Spirit: " + playerLife;
 
         }
+        if(collision.tag == "House")
+        {
+            endPanel.SetActive(true);
+        }
     }
 
     void Dead(GameObject g)
     {
         if (g.CompareTag("Enemy"))
         {
+
             isDead = true;
             Destroy(this.gameObject);
             restartPanel.SetActive(true);
-
             playerLife--;
             
+            PlayerPrefs.SetInt("PlayerLife", playerLife);
+            
+
             Debug.Log("can" + playerLife);
-            if (playerLife <= 0)
+            if (playerLife == -1)
             {
-                SceneManager.LoadScene("SampleScene");
+                Debug.Log("Calısti");
+                gameoverPanel.SetActive(true);
+                //SceneManager.LoadScene("SampleScene");
+                
             }
 
 
         }
     }
+    public void ResetScore()
+    {
+        if (playerLife == 0)
+        {
+            gameoverPanel.SetActive(true);
+            Debug.Log("Calısti");
+            PlayerPrefs.DeleteKey("PlayerLife");
+        }
 
-   
-
+    }
 
 
     #region Yön İşlemi

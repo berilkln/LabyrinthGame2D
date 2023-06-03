@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 22349869ab99c438b9402e47fccf280d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - American Captain
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1184ad3bb0a4543ca973e04f7c9c210b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
